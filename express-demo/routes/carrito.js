@@ -11,20 +11,24 @@ const arrayProductos = require('./productos').arr
 
 
 class Carrito{
-  constructor(id,nombre,stock,precio){
+  constructor(id,arrayProductos){
     this.id=id;
-    this.timestamp=timestamp;
-    this.productos=[];
+    this.timestamp=Date;
+    this.productos=arrayProductos;
   }
 }
 
+let arrayCarrito = [ 
+  new Carrito(1,[{"nombre":"woody"},{"nombre":"shrek"}])
+]
+
 routerCarrito.get("/",(req,res)=>{
-  res.render("productos",{arrayProductos:arrayProductos});
+  res.render("carritos",{arrayCarrito:arrayCarrito});
 })
 
 routerCarrito.get("/:id",(req,res)=>{
   const {id} = req.params
-  const producto = arrayProductos.find(m=> m.id == id)
+  const producto = arrayCarrito.find(m=> m.id == id)
   if (!producto) {
     res.status(404).send({
       error:"Producto no encontrado"
@@ -36,25 +40,24 @@ routerCarrito.get("/:id",(req,res)=>{
 
 routerCarrito.post("/",(req,res)=>{
   console.log(req.body);
-  const {nombre,stock,precio} = req.body
+  const {array} = req.body
   let biggestId = 0;
-  if (arrayProductos) {
-    arrayProductos.forEach(element => {
+  if (array) {
+    array.forEach(element => {
       if (element.id>biggestId) {
         biggestId = element.id;
       }
     });
   }
   biggestId++
-  const producto = new Producto(biggestId,nombre,stock,precio)
-  arrayProductos.push(producto)
+  const carrito = new Carrito(biggestId,array)
+  arrayCarrito.push(carrito)
   res.sendStatus(201)
-  res.send(arrayProductos.find(m=> m.id == biggestId))
 })
 
 routerCarrito.put("/:id",(req,res)=>{
   const {id} = req.params
-  const producto = arrayProductos.find(m=> m.id == id)
+  const producto = arrayCarrito.find(m=> m.id == id)
   if (!producto) {
     res.status(404).send({
       error:"Producto no encontrado"
@@ -76,15 +79,15 @@ routerCarrito.put("/:id",(req,res)=>{
 
 routerCarrito.delete("/:id",(req,res)=>{
   const {id} = req.params
-  const producto = arrayProductos.find(m=> m.id == id)
+  const producto = arrayCarrito.find(m=> m.id == id)
   if (!producto) {
     res.status(404).send({
       error:"Producto no encontrado"
     })
     return
   }
-  const index = arrayProductos.indexOf(producto)
-  arrayProductos.splice(index,1)
+  const index = arrayCarrito.indexOf(producto)
+  arrayCarrito.splice(index,1)
   res.sendStatus(200)
 })
 
