@@ -4,6 +4,8 @@ const { Server } = require('socket.io')
 const path = require('path')
 const app = express()
 const arrayProductos = require('./routes/productos').arr
+const addProdu = require('./routes/productos').addProducto
+
 
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
@@ -53,7 +55,7 @@ io.on('connection', (socket) => {
   })
   
   socket.on("aniadirProducto",(nombre,stock,precio)=>{
-    const element = addProducto(nombre,stock,precio,arrayProductos)
+    const element = addProdu(nombre,stock,precio)
     io.sockets.emit("producto",element)
   })
 

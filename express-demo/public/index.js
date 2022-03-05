@@ -1,6 +1,6 @@
 const socket = io()
 const productosTabla = $("#productosTabla")
-const aniadirProducto = document.querySelector("#aniadirProducto")
+const aniadirProducto = document.querySelector("#juli")
 
 aniadirProducto.addEventListener("click", (e) => {
   e.preventDefault()
@@ -39,6 +39,18 @@ function render(data) {
   }).join(" ");
   document.getElementById('messages').innerHTML = html;
 }
+
+function addProducto(e) {
+  console.log("wssssss");
+  const mensaje = {
+      nombre: document.getElementById('nombre').value,
+      stock: document.getElementById('stock').value,
+      precio: document.getElementById('precio').value
+  };
+  socket.emit('aniadirProducto', mensaje);
+  return false;
+}
+
 
 socket.on('messages', function(data) { render(data); });
 

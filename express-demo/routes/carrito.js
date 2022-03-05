@@ -8,12 +8,12 @@ app.use(express.urlencoded({extended: true}))
 
 const routerProductos = require('./productos').pro
 const arrayProductos = require('./productos').arr
-
+const conseguirFecha = require('./productos').fecha
 
 class Carrito{
   constructor(id,arrayProductos){
     this.id=id;
-    this.timestamp=Date;
+    this.timestamp=conseguirFecha;
     this.productos=arrayProductos;
   }
 }
