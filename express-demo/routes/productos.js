@@ -72,7 +72,7 @@ routerProductos.get("/:id",(req,res)=>{
 
 routerProductos.post("/",(req,res)=>{
   console.log(req.body);
-  const {nombre,stock,precio,admin} = req.body
+  const {nombre,descripcion,codigo,foto,stock,precio,admin} = req.body
   if (admin) {
     let biggestId = 0;
     if (arrayProductos) {
@@ -83,7 +83,7 @@ routerProductos.post("/",(req,res)=>{
     });
   }
   biggestId++
-  const producto = new Producto(biggestId,nombre,stock,precio)
+  const producto = new Producto(biggestId,nombre,descripcion,codigo,foto,stock,precio)
   arrayProductos.push(producto)
   // res.sendStatus(201)
   res.send(arrayProductos.find(m=> m.id == biggestId))
