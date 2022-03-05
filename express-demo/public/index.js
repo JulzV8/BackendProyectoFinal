@@ -10,8 +10,11 @@ aniadirProducto.addEventListener("click", (e) => {
   $("#precio")[0].value.length){
     socket.emit("aniadirProducto", 
     $("#nombre")[0].value,
-    $("#stock")[0].value,
-    $("#precio")[0].value)
+    $("#descripcion")[0].value,
+    $("#codigo")[0].value,
+    $("#foto")[0].value,
+    $("#precio")[0].value,
+    $("#stock")[0].value,true)
   }
 })
 

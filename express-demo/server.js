@@ -54,9 +54,11 @@ io.on('connection', (socket) => {
     socket.emit('messages', messages);
   })
   
-  socket.on("aniadirProducto",(nombre,stock,precio)=>{
-    const element = addProdu(nombre,stock,precio)
-    io.sockets.emit("producto",element)
+  socket.on("aniadirProducto",(nombre,descripcion,codigo,foto,stock,precio,admin)=>{
+    if (admin) {
+      const element = addProdu(nombre,descripcion,codigo,foto,stock,precio)
+      io.sockets.emit("producto",element)
+    }
   })
 
   socket.on('new-message',data => {

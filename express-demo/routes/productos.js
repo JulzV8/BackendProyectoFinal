@@ -34,12 +34,12 @@ class Producto{
 }
 
 let arrayProductos = [ 
-  new Producto(1,"hotwheels",20,250),
-  new Producto(2,"max-steel",5,900),
-  new Producto(3,"woody",10,1275)
+  new Producto(1,"hotwheels","cochecito","LV450","URL",20,250),
+  new Producto(2,"max-steel","muñeco","LV657","URL",5,900),
+  new Producto(3,"woody","muñeco","LX570","URL",10,1275)
 ]
 
-exports.addProducto = function (nombre,stock,precio) {
+exports.addProducto = function (nombre,descripcion,codigo,foto,stock,precio) {
   let biggestId = 0;
   if (arrayProductos.length) {
     arrayProductos.forEach(element => {
@@ -49,7 +49,7 @@ exports.addProducto = function (nombre,stock,precio) {
     });
   }
   biggestId++
-  const producto = new Producto(biggestId,nombre,stock,precio)
+  const producto = new Producto(biggestId,nombre,descripcion,codigo,foto,stock,precio)
   arrayProductos.push(producto)
     return producto;
 }
